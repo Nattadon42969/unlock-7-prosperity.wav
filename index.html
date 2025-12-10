@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Wishes for 2026</title>
+    <style>
+        /* ตั้งค่าพื้นฐาน */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* พื้นหลังสีขาวนวล */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        /* กล่องเครื่องเล่นเพลง */
+        .player-card {
+            background: white;
+            width: 90%;
+            max-width: 350px; /* ขนาดพอดีมือถือ */
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* รูปปกอัลบั้ม (ใส่รูปกล่องของขวัญ หรือรูป 2026 ตรงนี้) */
+        .album-art {
+            width: 200px;
+            height: 200px;
+            background: #FFD700; /* สีทอง */
+            border-radius: 20px;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        /* ชื่อเพลงและศิลปิน */
+        h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin: 5px 0 25px 0;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* ตัวเล่นเสียง (Custom Audio Player) */
+        audio {
+            width: 100%;
+            height: 40px;
+            outline: none;
+        }
+
+        /* ปรับสีของ Audio Controls (ใช้ได้ใน Chrome/Edge) */
+        audio::-webkit-media-controls-panel {
+            background-color: #f7f9fa;
+        }
+        audio::-webkit-media-controls-play-button {
+            background-color: #FFD700; /* ปุ่ม Play สีทอง */
+            border-radius: 50%;
+        }
+        
+        /* เส้นตกแต่ง */
+        .decoration {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player-card">
+        <div class="decoration"></div>
+
+        <div class="album-art">
+            🎁 </div>
+
+        <div class="track-info">
+            <h2>7 Wishes for 2026</h2>
+            <p>Special Gift for You</p>
+        </div>
+
+        <audio controls controlsList="nodownload">
+            <source src="unlock-7-prosperity.wav" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+    </div>
+
+</body>
+</html>
