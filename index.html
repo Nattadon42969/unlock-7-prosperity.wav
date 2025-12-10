@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f5f5f7; /* พื้นหลังสีเทาอ่อนแบบ Apple */
+            background-color: #f5f5f7;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,14 +36,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;
             position: relative;
+            overflow: hidden; /* ซ่อนส่วนเกินของภาพ */
         }
         
-        /* ใส่รูป 67 หรือ ริบบิ้น ตรงนี้ถ้ามีรูป */
         .album-emoji {
-            font-size: 100px;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- ส่วนที่เพิ่มเพื่อปรับขนาดรูปภาพ --- */
+        .album-emoji img {
+            width: 100%;        /* ให้กว้างเต็มกรอบ 240px */
+            height: 100%;       /* ให้สูงเต็มกรอบ 240px */
+            object-fit: cover;  /* ตัดส่วนเกินออกเพื่อให้ภาพเต็มกรอบพอดี (ไม่เบี้ยว) */
+            /* ถ้าอยากให้เห็นรูปเต็มใบ (ไม่โดนตัด) ให้เปลี่ยน cover เป็น contain */
+            border-radius: 12px;
         }
 
         h2 {
@@ -58,7 +69,6 @@
             margin: 0 0 25px 0;
         }
 
-        /* Custom Audio Controls */
         .controls {
             display: flex;
             justify-content: center;
@@ -98,7 +108,7 @@
 
         .progress-bar {
             height: 100%;
-            background: #FDB931; /* สีทอง */
+            background: #FDB931;
             border-radius: 5px;
             width: 0%;
         }
@@ -117,7 +127,7 @@
 
     <div class="player-container">
         <div class="album-cover">
-            <div class="album-emoji"><image src="2818.png"></image></div> 
+            <div class="album-emoji"><img src="2818.png" alt="Cover Art"></div> 
         </div>
 
         <h2>Wishes for 2026</h2>
@@ -146,31 +156,27 @@
         const currentTimeEl = document.getElementById('currentTime');
         const durationEl = document.getElementById('duration');
 
-        // ฟังก์ชัน Play/Pause
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
-                playBtn.innerHTML = '❚❚'; // เปลี่ยนเป็นปุ่ม Pause
+                playBtn.innerHTML = '❚❚';
             } else {
                 audio.pause();
-                playBtn.innerHTML = '▶'; // เปลี่ยนเป็นปุ่ม Play
+                playBtn.innerHTML = '▶';
             }
         });
 
-        // อัปเดตแถบความคืบหน้า
         audio.addEventListener('timeupdate', (e) => {
             const { duration, currentTime } = e.srcElement;
             const progressPercent = (currentTime / duration) * 100;
             progressBar.style.width = `${progressPercent}%`;
             
-            // อัปเดตเวลา
             let min = Math.floor(currentTime / 60);
             let sec = Math.floor(currentTime % 60);
             if (sec < 10) sec = `0${sec}`;
             currentTimeEl.innerText = `${min}:${sec}`;
         });
 
-        // ตั้งค่าเวลาจบเพลงเมื่อโหลดเสร็จ
         audio.addEventListener('loadedmetadata', () => {
             let min = Math.floor(audio.duration / 60);
             let sec = Math.floor(audio.duration % 60);
@@ -178,7 +184,6 @@
             durationEl.innerText = `${min}:${sec}`;
         });
 
-        // คลิกที่แถบเพื่อเลื่อนเพลง
         progressContainer.addEventListener('click', (e) => {
             const width = progressContainer.clientWidth;
             const clickX = e.offsetX;
@@ -186,7 +191,6 @@
             audio.currentTime = (clickX / width) * duration;
         });
 
-        // จบเพลงแล้วเปลี่ยนปุ่มกลับ
         audio.addEventListener('ended', () => {
             playBtn.innerHTML = '▶';
             progressBar.style.width = '0%';
